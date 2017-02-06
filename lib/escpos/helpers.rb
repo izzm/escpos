@@ -23,26 +23,26 @@ module Escpos
     alias :set_encoding :encoding
     alias :set_printer_encoding :encoding
 
-    def text(data)
+    def text(data = nil)
       [
         Escpos.sequence(Escpos::TXT_NORMAL),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_NORMAL),
       ].join
     end
 
-    def double_height(data)
+    def double_height(data = nil)
       [
         Escpos.sequence(Escpos::TXT_2HEIGHT),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_NORMAL),
       ].join
     end
 
-    def quad_text(data)
+    def quad_text(data = nil)
       [
         Escpos.sequence(Escpos::TXT_4SQUARE),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_NORMAL),
       ].join
     end
@@ -52,78 +52,78 @@ module Escpos
     alias :double_width_double_height :quad_text
     alias :double_height_double_width :quad_text
 
-    def double_width(data)
+    def double_width(data = nil)
       [
         Escpos.sequence(Escpos::TXT_2WIDTH),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_NORMAL),
       ].join
     end
 
-    def underline(data)
+    def underline(data = nil)
       [
         Escpos.sequence(Escpos::TXT_UNDERL_ON),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_UNDERL_OFF),
       ].join
     end
     alias :u :underline
 
-    def underline2(data)
+    def underline2(data = nil)
       [
         Escpos.sequence(Escpos::TXT_UNDERL2_ON),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_UNDERL_OFF),
       ].join
     end
     alias :u2 :underline2
 
-    def bold(data)
+    def bold(data = nil)
       [
         Escpos.sequence(Escpos::TXT_BOLD_ON),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_BOLD_OFF),
       ].join
     end
     alias :b :bold
 
-    def left(data = '')
+    def left(data = nil)
       [
         Escpos.sequence(Escpos::TXT_ALIGN_LT),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_ALIGN_LT),
       ].join
     end
 
-    def right(data = '')
+    def right(data = nil)
       [
         Escpos.sequence(Escpos::TXT_ALIGN_RT),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_ALIGN_LT),
       ].join
     end
 
-    def center(data = '')
+    def center(data = nil)
       [
         Escpos.sequence(Escpos::TXT_ALIGN_CT),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_ALIGN_LT),
       ].join
     end
 
-    def inverted(data)
+    def inverted(data = nil)
       [
         Escpos.sequence(Escpos::TXT_INVERT_ON),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_INVERT_OFF),
       ].join
     end
     alias :invert :inverted
 
-    def black
+    def black(data = nil)
       [
         Escpos.sequence(Escpos::TXT_COLOR_BLACK),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_COLOR_BLACK),
       ].join
     end
@@ -131,10 +131,10 @@ module Escpos
     alias :black_color :black
     alias :color_black :black
 
-    def red
+    def red(data = nil)
       [
         Escpos.sequence(Escpos::TXT_COLOR_BLACK),
-        data,
+        (data || yield),
         Escpos.sequence(Escpos::TXT_COLOR_RED),
       ].join
     end
